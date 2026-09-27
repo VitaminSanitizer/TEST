@@ -1,0 +1,234 @@
+---
+import { site } from '../content/site';
+const { form, contactEmail } = site;
+const { labels, hints } = form;
+const configured = !form.formEndpoint.includes('YOUR_FORM_ID');
+---
+
+<section class="section" id="interest" aria-labelledby="interest-heading">
+  <div class="container narrow">
+    <div class="section-head">
+      <span class="eyebrow">{form.eyebrow}</span>
+      <h2 id="interest-heading">{form.heading}</h2>
+      <p class="muted">{form.intro}</p>
+    </div>
+
+    <form
+      class="form"
+      action={form.formEndpoint}
+      method="POST"
+      data-configured={configured ? 'true' : 'false'}
+      data-sending={form.sending}
+    >
+      <p class="form__note muted">{form.requiredNote}</p>
+
+      <div class="form__grid">
+        <div class="field">
+          <label for="studentName">{labels.studentName}</label>
+          <input id="studentName" name="studentName" type="text" autocomplete="name" required />
+        </div>
+
+        <div class="field">
+          <label for="parentName">{labels.parentName}</label>
+          <input id="parentName" name="parentName" type="text" autocomplete="off" required />
+        </div>
+
+        <div class="field">
+          <label for="email">{labels.email}</label>
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
+        </div>
+
+        <div class="field">
+          <label for="highSchool">{labels.highSchool}</label>
+          <input id="highSchool" name="highSchool" type="text" autocomplete="organization" required />
+        </div>
+
+        <div class="field">
+          <label for="gradYear">{labels.gradYear}</label>
+          <select id="gradYear" name="gradYear" required>
+            <option value="" disabled selected>{form.gradYearPrompt}</option>
+            {form.gradYears.map((year) => <option value={year}>{year}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="areaOfStudy">{labels.areaOfStudy}</label>
+          <input
+            id="areaOfStudy"
+            name="areaOfStudy"
+            type="text"
+            aria-describedby="areaOfStudy-hint"
+            required
+          />
+          <p class="field__hint" id="areaOfStudy-hint">{hints.areaOfStudy}</p>
+        </div>
+
+        <div class="field field--full">
+          <label for="schools">{labels.schools}</label>
+          <input id="schools" name="schools" type="text" aria-describedby="schools-hint" required />
+          <p class="field__hint" id="schools-hint">{hints.schools}</p>
+        </div>
+
+        <div class="field field--full">
+          <label for="message">{labels.message}</label>
+          <textarea id="message" name="message" rows="5" aria-describedby="message-hint"></textarea>
+          <p class="field__hint" id="message-hint">{hints.message}</p>
+        </div>
+      </div>
+
+      <!-- Spam trap for Formspree; hidden from people and screen readers. -->
+      <div class="visually-hidden" aria-hidden="true">
+        <label for="_gotcha">Leave this field empty</label>
+        <input id="_gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+      <input type="hidden" name="_subject" value="New interest form — Sine Mora Advisory" />
+
+      <p class="form__error" role="alert" hidden>
+        <span data-message>{configured ? form.errorBody : form.notConfigured}</span>
+        {' '}<a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+      </p>
+
+      <button class="button button--solid form__submit" type="submit">{form.submit}</button>
+    </form>
+
+    <div class="form__success" tabindex="-1" hidden>
+      <h3>{form.successHeading}</h3>
+      <p>{form.successBody}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .form__note {
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+  }
+  .form__grid {
+    display: grid;
+    gap: 1.75rem 1.5rem;
+  }
+  @media (min-width: 40rem) {
+    .form__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .field--full {
+      grid-column: 1 / -1;
+    }
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.8rem 0.9rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: border-color 0.2s ease;
+  }
+  select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - 1.15rem) 50%, calc(100% - 0.8rem) 50%;
+    background-size: 0.35rem 0.35rem;
+    background-repeat: no-repeat;
+    padding-right: 2.5rem;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+  input:hover,
+  select:hover,
+  textarea:hover {
+    border-color: var(--muted);
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 0;
+    border-color: var(--focus);
+  }
+  input:user-invalid,
+  select:user-invalid {
+    border-color: var(--error);
+  }
+  .field__hint {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  .form__error {
+    margin-top: 2rem;
+    color: var(--error);
+  }
+  .form__submit {
+    margin-top: 2.5rem;
+  }
+  .form__success {
+    padding: clamp(2rem, 5vw, 3rem);
+    background: var(--surface);
+    border-left: 2px solid var(--accent);
+  }
+  .form__success:focus {
+    outline: none;
+  }
+  .form__success h3 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    margin-bottom: 0.75rem;
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#interest form');
+  const success = document.querySelector<HTMLElement>('#interest .form__success');
+
+  if (form && success) {
+    const error = form.querySelector<HTMLElement>('.form__error')!;
+    const button = form.querySelector<HTMLButtonElement>('.form__submit')!;
+    const buttonLabel = button.textContent;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      error.hidden = true;
+
+      if (form.dataset.configured !== 'true') {
+        error.hidden = false;
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = form.dataset.sending ?? buttonLabel;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+      } catch {
+        error.hidden = false;
+        button.disabled = false;
+        button.textContent = buttonLabel;
+      }
+    });
+  }
+</script>
