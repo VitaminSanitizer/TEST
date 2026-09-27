@@ -44,7 +44,7 @@ export const site = {
     eyebrow: 'Why us',
     heading: 'Admissions have changed. So has the advice.',
     body: [
-      'College admissions look nothing like they did a decade ago. Testing policies keep shifting, schools read essays differently since the Supreme Court’s 2023 ruling on race conscious admissions, and every applicant now writes in a world with AI.',
+      'College admissions look nothing like they did a decade ago. Testing policies keep shifting, schools read essays differently since the Supreme Court’s 2023 ruling on admissions, and every applicant now writes in a world with AI.',
       'We applied through these changes and got into Penn, and we live the result every day as students across its schools and majors. We know what admissions offices are looking for now, not what worked when your parents applied.',
     ],
   },
