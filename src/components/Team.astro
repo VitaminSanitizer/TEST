@@ -1,0 +1,99 @@
+---
+import { site } from '../content/site';
+const { team } = site;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+// Initials for the placeholder when no photo is set, e.g. "Jane Doe" -> "JD".
+function initials(name: string) {
+  const letters = name
+    .replace(/[^\p{L}\s]/gu, '')
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => word[0].toUpperCase());
+  return letters.length ? letters[0] + (letters.length > 1 ? letters[letters.length - 1] : '') : '';
+}
+---
+
+<section class="section" id="team" aria-labelledby="team-heading">
+  <div class="container">
+    <div class="section-head" style="max-width: var(--measure)">
+      <span class="eyebrow">{team.eyebrow}</span>
+      <h2 id="team-heading">{team.heading}</h2>
+      <p class="muted">{team.intro}</p>
+    </div>
+
+    <ul class="team" role="list">
+      {
+        team.members.map((member) => (
+          <li class="member">
+            {member.photo ? (
+              <img
+                class="member__photo"
+                src={`${base}${member.photo.replace(/^\//, '')}`}
+                alt={member.photoAlt || `Portrait of ${member.name}`}
+                width="480"
+                height="600"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div class="member__photo member__photo--placeholder" role="img" aria-label={`Photo of ${member.name} coming soon`}>
+                <span aria-hidden="true">{initials(member.name) || 'SM'}</span>
+              </div>
+            )}
+            <h3 class="member__name">{member.name}</h3>
+            <p class="member__meta">
+              {member.school}
+              <br />
+              {member.major}
+            </p>
+            <p class="member__bio">{member.bio}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .team {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    gap: clamp(2.5rem, 5vw, 3.5rem) clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .member__photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    margin-bottom: 1.25rem;
+    background: var(--surface);
+    filter: grayscale(100%);
+  }
+  .member__photo--placeholder {
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--rule);
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .member__name {
+    font-size: 1.5rem;
+  }
+  .member__meta {
+    margin-top: 0.4rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    color: var(--accent);
+  }
+  .member__bio {
+    margin-top: 0.9rem;
+    font-size: 0.975rem;
+    color: var(--muted);
+  }
+</style>

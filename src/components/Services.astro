@@ -1,0 +1,97 @@
+---
+import { site } from '../content/site';
+const { services } = site;
+---
+
+<section class="section" id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="section-head narrow-left">
+      <span class="eyebrow">{services.eyebrow}</span>
+      <h2 id="services-heading">{services.heading}</h2>
+      <p class="muted">{services.intro}</p>
+    </div>
+
+    <ul class="services" role="list">
+      {
+        services.items.map((item) => (
+          <li class="service">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+            {item.points.length > 0 && (
+              <ul class="service__points">
+                {item.points.map((point) => <li>{point}</li>)}
+              </ul>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="notes">
+      {
+        services.notes.map((note) => (
+          <div class="note">
+            <h3>{note.title}</h3>
+            <p class="muted">{note.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .narrow-left {
+    max-width: var(--measure);
+  }
+  .services {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 52rem) {
+    .services {
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(2rem, 4vw, 3.5rem);
+    }
+  }
+  .service {
+    border-top: 1px solid var(--text);
+    padding-top: 1.5rem;
+  }
+  .service h3 {
+    margin-bottom: 1rem;
+  }
+  .service__points {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+  }
+  .service__points li {
+    padding-block: 0.55rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+  }
+  .service__points li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .notes {
+    display: grid;
+    gap: 2rem;
+    margin-top: clamp(3.5rem, 8vw, 5.5rem);
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    background: var(--surface);
+  }
+  @media (min-width: 44rem) {
+    .notes {
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+  }
+  .note h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+  }
+</style>

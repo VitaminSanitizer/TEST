@@ -1,0 +1,26 @@
+---
+import { site } from '../content/site';
+const { cohort } = site;
+---
+
+<section class="cohort" id="cohort" aria-labelledby="cohort-heading">
+  <div class="container narrow">
+    <span class="eyebrow">{cohort.eyebrow}</span>
+    <h2 id="cohort-heading">{cohort.heading}</h2>
+    <p class="cohort__body">{cohort.body}</p>
+    <a class="button button--solid" href="#interest">{cohort.button}</a>
+  </div>
+</section>
+
+<style>
+  .cohort {
+    padding-block: var(--section-space);
+    background: var(--surface);
+    text-align: center;
+  }
+  .cohort__body {
+    margin-block: 1.25rem 2.5rem;
+    font-size: clamp(1.125rem, 1.8vw, 1.25rem);
+    color: var(--muted);
+  }
+</style>

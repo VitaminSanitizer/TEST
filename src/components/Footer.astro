@@ -1,0 +1,57 @@
+---
+import { site } from '../content/site';
+const { footer, contactEmail, hero } = site;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <p class="footer__name">{hero.name}</p>
+      <p class="footer__contact">
+        <span class="muted">{footer.contactLabel}</span>
+        <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      </p>
+    </div>
+    <p class="footer__disclaimer">{footer.disclaimer}</p>
+    <p class="footer__copy">&copy; {year} {footer.copyrightName}. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--rule);
+    padding-block: clamp(3.5rem, 8vw, 5rem) 2.5rem;
+    font-size: 0.875rem;
+  }
+  .footer__inner {
+    display: grid;
+    gap: 2rem;
+  }
+  .footer__brand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem 2rem;
+  }
+  .footer__name {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+  }
+  .footer__contact {
+    display: flex;
+    gap: 0.75rem;
+  }
+  .footer__disclaimer {
+    max-width: 44rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .footer__copy {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.8125rem;
+  }
+</style>

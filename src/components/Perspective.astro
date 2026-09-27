@@ -1,0 +1,27 @@
+---
+import { site } from '../content/site';
+const { perspective } = site;
+---
+
+<section class="section perspective" id="perspective" aria-labelledby="perspective-heading">
+  <div class="container narrow">
+    <span class="eyebrow">{perspective.eyebrow}</span>
+    <h2 id="perspective-heading">{perspective.heading}</h2>
+    <p class="perspective__body">{perspective.body}</p>
+  </div>
+</section>
+
+<style>
+  .perspective {
+    text-align: center;
+  }
+  .perspective h2 {
+    font-style: italic;
+    font-weight: 400;
+  }
+  .perspective__body {
+    margin-top: 2rem;
+    font-size: clamp(1.125rem, 1.8vw, 1.25rem);
+    color: var(--muted);
+  }
+</style>

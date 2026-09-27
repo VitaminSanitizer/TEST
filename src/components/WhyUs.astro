@@ -1,0 +1,30 @@
+---
+import { site } from '../content/site';
+const { whyUs } = site;
+---
+
+<section class="section" id="why-us" aria-labelledby="why-us-heading">
+  <div class="container split">
+    <div>
+      <span class="eyebrow">{whyUs.eyebrow}</span>
+      <h2 id="why-us-heading">{whyUs.heading}</h2>
+    </div>
+    <div class="lede">
+      {whyUs.body.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .split {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 52rem) {
+    .split {
+      grid-template-columns: 5fr 7fr;
+      gap: clamp(3rem, 8vw, 7rem);
+      align-items: start;
+    }
+  }
+</style>

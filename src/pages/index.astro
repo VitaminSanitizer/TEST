@@ -1,6 +1,25 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import WhyUs from '../components/WhyUs.astro';
+import Perspective from '../components/Perspective.astro';
+import Services from '../components/Services.astro';
+import Team from '../components/Team.astro';
+import Cohort from '../components/Cohort.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../content/site';
 ---
-<Base title="Sine Mora Advisory" description="College admissions advising from current Penn students.">
-  <main id="main"><h1>Sine Mora Advisory</h1></main>
+
+<Base title={site.meta.title} description={site.meta.description}>
+  <main id="main">
+    <Hero />
+    <WhyUs />
+    <Perspective />
+    <Services />
+    <Team />
+    <Cohort />
+    <FAQ />
+  </main>
+  <Footer />
 </Base>
