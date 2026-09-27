@@ -119,7 +119,8 @@ public/
   team/                  ← team photos
 ```
 
-- **Colors and fonts:** change the variables at the top of `src/styles/global.css`. Dark mode colors are in the `prefers-color-scheme: dark` block just below.
+- **Colors and fonts:** change the variables at the top of `src/styles/global.css`. Dark mode colors are in the two dark blocks just below; keep them identical.
+- **Light/dark button:** `src/components/ThemeToggle.astro`. It follows the visitor's device setting until they click it, then remembers their choice. To remove it, delete the `<ThemeToggle />` line in `src/layouts/Base.astro`.
 - **Reordering or removing a section:** edit the list of components in `src/pages/index.astro`.
 
 ## Brand notes

@@ -26,11 +26,26 @@
   --section-space: clamp(5rem, 12vw, 9rem);
   --radius: 2px;
 
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
+/* Palette — dark.
+   Used when the visitor picks dark with the theme button, or when their
+   device is set to dark and they haven't picked. Keep both blocks in sync. */
+:root[data-theme='dark'] {
+  --bg: #161614;
+  --surface: #201f1c;
+  --text: #ece8df;
+  --muted: #a8a398;
+  --rule: #34322d;
+  --accent: #aebc98;
+  --accent-contrast: #161614;
+  --focus: #aebc98;
+  --error: #e59a86;
+  color-scheme: dark;
+}
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --bg: #161614;
     --surface: #201f1c;
     --text: #ece8df;
@@ -40,6 +55,7 @@
     --accent-contrast: #161614;
     --focus: #aebc98;
     --error: #e59a86;
+    color-scheme: dark;
   }
 }
 

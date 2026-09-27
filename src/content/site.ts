@@ -23,6 +23,12 @@ export const site = {
       'Independent college admissions advising from current University of Pennsylvania students. Essay review, one-on-one advising, and full application support in English and Spanish.',
   },
 
+  /* Light/dark mode button (top right). Read aloud by screen readers. */
+  themeToggle: {
+    toDark: 'Switch to dark mode',
+    toLight: 'Switch to light mode',
+  },
+
   /* PLACEHOLDER: the email shown in the footer and form error message. */
   contactEmail: 'hello@example.com',
 
